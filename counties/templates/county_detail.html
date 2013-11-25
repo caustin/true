@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ county_name }}</title>
+</head>
+<body>
+    <h2>City Info for the county {{ county_name }}</h2>
+    <table>
+        <tr>
+            <td>City</td>
+            <td>Latitude</td>
+            <td>Longitude</td>
+        </tr>
+        {% for county_info in county_infos %}
+        <tr>
+            <td>{{ county_info.name }}</td>
+            <td>{{ county_info.primary_latitude }}</td>
+            <td>{{ county_info.primary_longitude }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+
+</body>
+</html>

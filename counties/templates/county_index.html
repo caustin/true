@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>County Index</title>
+</head>
+<body>
+    <div>
+        <h2>All Counties, Cities and, Coordinates.</h2>
+    </div>
+
+    {% if county_list %}
+        <table>
+            <tr>
+                <td>County Name</td>
+                <td>City Name</td>
+                <td>Latitude</td>
+                <td>Longitude</td>
+            </tr>
+            {% for county in county_list %}
+            <tr>
+                <td><a href="{% url 'detail' county.id %}">{{ county.county_name }}</a></td>
+                <td>{{ county.name }}</td>
+                <td>{{ county.primary_latitude }}</td>
+                <td>{{ county.primary_longitude }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        {% if is_paginated %}
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="/counties?page={{ page_obj.previous_page_number }}">previous</a>
+                {% endif %}
+                <span class="page-current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="/counties?page={{ page_obj.next_page_number }}">next</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+    {% else %}
+        <p>No counties are available.</p>
+    {% endif %}
+</body>
+</html>
